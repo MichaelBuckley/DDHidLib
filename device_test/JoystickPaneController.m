@@ -109,7 +109,7 @@
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
+                 stick: (NSUInteger) stick
               xChanged: (int) value;
 {
     [self willChangeValueForKey: @"xAxis"];
@@ -118,7 +118,7 @@
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
+                 stick: (NSUInteger) stick
               yChanged: (int) value;
 {
     [self willChangeValueForKey: @"yAxis"];
@@ -127,32 +127,32 @@
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             otherAxis: (unsigned) otherAxis
+                 stick: (NSUInteger) stick
+             otherAxis: (NSUInteger) otherAxis
           valueChanged: (int) value;
 {
     // Somehow display values here
-    NSLog(@"Stick: %d, other axis: %d, changed: %d", stick, otherAxis, value);
+    NSLog(@"Stick: %lu, other axis: %lu, changed: %d", (unsigned long) stick, (unsigned long) otherAxis, value);
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             povNumber: (unsigned) povNumber
+                 stick: (NSUInteger) stick
+             povNumber: (NSUInteger) povNumber
           valueChanged: (int) value;
 {
     // Somehow display values here
-    NSLog(@"Stick: %d, POV number: %d, changed: %d", stick, povNumber, value);
+    NSLog(@"Stick: %lu, POV number: %lu, changed: %d", (unsigned long)stick, (unsigned long)povNumber, value);
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-            buttonDown: (unsigned) buttonNumber;
+            buttonDown: (NSUInteger) buttonNumber;
 {
     ButtonState * state = [mJoystickButtons objectAtIndex: buttonNumber];
     [state setPressed: YES];
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-              buttonUp: (unsigned) buttonNumber;
+              buttonUp: (NSUInteger) buttonNumber;
 {
     ButtonState * state = [mJoystickButtons objectAtIndex: buttonNumber];
     [state setPressed: NO];

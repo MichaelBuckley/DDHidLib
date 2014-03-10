@@ -56,9 +56,9 @@
 @interface KeyboardPaneController (DDHidKeyboardDelegate)
 
 - (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-               keyDown: (unsigned) usageId;
+               keyDown: (NSUInteger) usageId;
 
 - (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-                 keyUp: (unsigned) usageId;
+                 keyUp: (NSUInteger) usageId;
 
 @end

@@ -57,8 +57,8 @@
         return nil;
     
     mProperties = [properties retain];
-    unsigned usagePage = [mProperties ddhid_unsignedIntForString: kIOHIDElementUsagePageKey];
-    unsigned usageId = [mProperties ddhid_unsignedIntForString: kIOHIDElementUsageKey];
+    NSUInteger usagePage = [mProperties ddhid_unsignedIntForString: kIOHIDElementUsagePageKey];
+    NSUInteger usageId = [mProperties ddhid_unsignedIntForString: kIOHIDElementUsageKey];
     mUsage = [[DDHidUsage alloc] initWithUsagePage: usagePage
                                            usageId: usageId];
     
@@ -106,7 +106,7 @@
     [mProperties ddhid_unsignedIntForString: kIOHIDElementCookieKey];
 }
 
-- (unsigned) cookieAsUnsigned;
+- (NSUInteger) cookieAsUnsigned;
 {
     return [mProperties ddhid_unsignedIntForString: kIOHIDElementCookieKey];
 }
@@ -163,11 +163,11 @@
 
 - (NSComparisonResult) compareByUsage: (DDHidElement *) device;
 {
-    unsigned myUsagePage = [[self usage] usagePage];
-    unsigned myUsageId = [[self usage] usageId];
+    NSUInteger myUsagePage = [[self usage] usagePage];
+    NSUInteger myUsageId = [[self usage] usageId];
 
-    unsigned otherUsagePage = [[device usage] usagePage];
-    unsigned otherUsageId = [[device usage] usageId];
+    NSUInteger otherUsagePage = [[device usage] usagePage];
+    NSUInteger otherUsageId = [[device usage] usageId];
 
     if (myUsagePage < otherUsagePage)
         return NSOrderedAscending;

@@ -28,28 +28,28 @@
 @interface DDHidJoystick (DDHidJoystickDelegate)
 
 - (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
+                 stick: (NSUInteger) stick
               xChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
+                 stick: (NSUInteger) stick
               yChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             otherAxis: (unsigned) otherAxis
+                 stick: (NSUInteger) stick
+             otherAxis: (NSUInteger) otherAxis
           valueChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             povNumber: (unsigned) povNumber
+                 stick: (NSUInteger) stick
+             povNumber: (NSUInteger) povNumber
           valueChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-            buttonDown: (unsigned) buttonNumber;
+            buttonDown: (NSUInteger) buttonNumber;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-              buttonUp: (unsigned) buttonNumber;
+              buttonUp: (NSUInteger) buttonNumber;
 
 @end
 
@@ -66,21 +66,21 @@
 - (int) povValue: (int) value
       forElement: (DDHidElement *) element;
 
-- (BOOL) findStick: (unsigned *) stick
+- (BOOL) findStick: (NSUInteger *) stick
            element: (DDHidElement **) elementOut
    withXAxisCookie: (IOHIDElementCookie) cookie;
 
-- (BOOL) findStick: (unsigned *) stick
+- (BOOL) findStick: (NSUInteger *) stick
            element: (DDHidElement **) elementOut
    withYAxisCookie: (IOHIDElementCookie) cookie;
 
-- (BOOL) findStick: (unsigned *) stickOut
-         otherAxis: (unsigned *) axisOut
+- (BOOL) findStick: (NSUInteger *) stickOut
+         otherAxis: (NSUInteger *) axisOut
            element: (DDHidElement **) elementOut
         withCookie: (IOHIDElementCookie) cookie;
 
-- (BOOL) findStick: (unsigned *) stickOut
-         povNumber: (unsigned *) povNumber
+- (BOOL) findStick: (NSUInteger *) stickOut
+         povNumber: (NSUInteger *) povNumber
            element: (DDHidElement **) elementOut
         withCookie: (IOHIDElementCookie) cookie;
 
@@ -172,7 +172,7 @@
     return mButtonElements; 
 }
 
-- (unsigned) numberOfButtons;
+- (NSUInteger) numberOfButtons;
 {
     return [mButtonElements count];
 }
@@ -180,12 +180,12 @@
 #pragma mark -
 #pragma mark Sticks - indexed accessors
 
-- (unsigned int) countOfSticks 
+- (NSUInteger) countOfSticks
 {
     return [mSticks count];
 }
 
-- (DDHidJoystickStick *) objectInSticksAtIndex: (unsigned int)index 
+- (DDHidJoystickStick *) objectInSticksAtIndex: (NSUInteger) index
 {
     return [mSticks objectAtIndex: index];
 }
@@ -233,8 +233,8 @@
     DDHidElement * element;
     while (element = [e nextObject])
     {
-        unsigned usagePage = [[element usage] usagePage];
-        unsigned usageId = [[element usage] usageId];
+        NSUInteger usagePage = [[element usage] usagePage];
+        NSUInteger usageId = [[element usage] usageId];
         if (usagePage == kHIDPage_GenericDesktop &&
             (usageId == kHIDUsage_GD_Joystick || usageId == kHIDUsage_GD_GamePad)) 
         {
@@ -252,8 +252,8 @@
 
     while (element = [e nextObject])
     {
-        unsigned usagePage = [[element usage] usagePage];
-        unsigned usageId = [[element usage] usageId];
+        NSUInteger usagePage = [[element usage] usagePage];
+        NSUInteger usageId = [[element usage] usageId];
         NSArray * subElements = [element elements];
         
         if ([subElements count] > 0)
@@ -299,9 +299,9 @@
         IOHIDElementCookie cookie = [event elementCookie];
         SInt32 value = [event value];
         DDHidElement * element;
-        unsigned stick;
-        unsigned otherAxis;
-        unsigned povNumber;
+        NSUInteger stick;
+        NSUInteger otherAxis;
+        NSUInteger povNumber;
         if ([self findStick: &stick element: &element withXAxisCookie: cookie])
         {
             int normalizedValue = [self normalizeValue: value forElement: element];
@@ -328,7 +328,7 @@
         }
         else
         {
-            unsigned i = 0;
+            NSUInteger i = 0;
             for (i = 0; i < [[self buttonElements] count]; i++)
             {
                 if (cookie == [[[self buttonElements] objectAtIndex: i] cookie])
@@ -381,7 +381,7 @@
 	return 36000 / (max - min + 1) * (value - min);
 }
 
-- (BOOL) findStick: (unsigned *) stick
+- (BOOL) findStick: (NSUInteger *) stick
            element: (DDHidElement **) elementOut
    withXAxisCookie: (IOHIDElementCookie) cookie;
 {
@@ -399,11 +399,11 @@
     return NO;
 }
 
-- (BOOL) findStick: (unsigned *) stick
+- (BOOL) findStick: (NSUInteger *) stick
            element: (DDHidElement **) elementOut
    withYAxisCookie: (IOHIDElementCookie) cookie;
 {
-    unsigned i;
+    NSUInteger i;
     for (i = 0; i < [mSticks count]; i++)
     {
         DDHidElement * element = [[mSticks objectAtIndex: i] yAxisElement];
@@ -417,16 +417,16 @@
     return NO;
 }
 
-- (BOOL) findStick: (unsigned *) stickOut
-         otherAxis: (unsigned *) axisOut
+- (BOOL) findStick: (NSUInteger *) stickOut
+         otherAxis: (NSUInteger *) axisOut
            element: (DDHidElement **) elementOut
         withCookie: (IOHIDElementCookie) cookie;
 {
-    unsigned i;
+    NSUInteger i;
     for (i = 0; i < [mSticks count]; i++)
     {
         DDHidJoystickStick * stick = [mSticks objectAtIndex: i];
-        unsigned j;
+        NSUInteger j;
         for (j = 0; j < [stick countOfStickElements]; j++)
         {
             DDHidElement * element = [stick objectInStickElementsAtIndex: j];
@@ -442,16 +442,16 @@
     return NO;
 }
 
-- (BOOL) findStick: (unsigned *) stickOut
-         povNumber: (unsigned *) povNumber
+- (BOOL) findStick: (NSUInteger *) stickOut
+         povNumber: (NSUInteger *) povNumber
            element: (DDHidElement **) elementOut
         withCookie: (IOHIDElementCookie) cookie;
 {
-    unsigned i;
+    NSUInteger i;
     for (i = 0; i < [mSticks count]; i++)
     {
         DDHidJoystickStick * stick = [mSticks objectAtIndex: i];
-        unsigned j;
+        NSUInteger j;
         for (j = 0; j < [stick countOfPovElements]; j++)
         {
             DDHidElement * element = [stick objectInPovElementsAtIndex: j];
@@ -472,7 +472,7 @@
 @implementation DDHidJoystick (DDHidJoystickDelegate)
 
 - (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
+                 stick: (NSUInteger) stick
               xChanged: (int) value;
 {
     if ([mDelegate respondsToSelector: _cmd])
@@ -480,7 +480,7 @@
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
+                 stick: (NSUInteger) stick
               yChanged: (int) value;
 {
     if ([mDelegate respondsToSelector: _cmd])
@@ -488,8 +488,8 @@
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             otherAxis: (unsigned) otherAxis
+                 stick: (NSUInteger) stick
+             otherAxis: (NSUInteger) otherAxis
           valueChanged: (int) value;
 {
     if ([mDelegate respondsToSelector: _cmd])
@@ -498,8 +498,8 @@
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             povNumber: (unsigned) povNumber
+                 stick: (NSUInteger) stick
+             povNumber: (NSUInteger) povNumber
           valueChanged: (int) value;
 {
     if ([mDelegate respondsToSelector: _cmd])
@@ -508,14 +508,14 @@
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-            buttonDown: (unsigned) buttonNumber;
+            buttonDown: (NSUInteger) buttonNumber;
 {
     if ([mDelegate respondsToSelector: _cmd])
         [mDelegate ddhidJoystick: joystick buttonDown: buttonNumber];
 }
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-              buttonUp: (unsigned) buttonNumber;  
+              buttonUp: (NSUInteger) buttonNumber;
 {
     if ([mDelegate respondsToSelector: _cmd])
         [mDelegate ddhidJoystick: joystick buttonUp: buttonNumber];
@@ -623,12 +623,12 @@
 #pragma mark -
 #pragma mark mStickElements - indexed accessors
 
-- (unsigned int) countOfStickElements 
+- (NSUInteger) countOfStickElements
 {
     return [mStickElements count];
 }
 
-- (DDHidElement *) objectInStickElementsAtIndex: (unsigned int)index 
+- (DDHidElement *) objectInStickElementsAtIndex: (NSUInteger) index
 {
     return [mStickElements objectAtIndex: index];
 }
@@ -636,12 +636,12 @@
 #pragma mark -
 #pragma mark PovElements - indexed accessors
 
-- (unsigned int) countOfPovElements;
+- (NSUInteger) countOfPovElements;
 {
     return [mPovElements count];
 }
 
-- (DDHidElement *) objectInPovElementsAtIndex: (unsigned int)index;
+- (DDHidElement *) objectInPovElementsAtIndex: (NSUInteger) index;
 {
     return [mPovElements objectAtIndex: index];
 }

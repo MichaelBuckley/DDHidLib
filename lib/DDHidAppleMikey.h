@@ -44,7 +44,7 @@
 
 - (NSArray *) pressElements;
 
-- (unsigned) numberOfKeys;
+- (NSUInteger) numberOfKeys;
 
 - (void) addElementsToQueue: (DDHidQueue *) queue;
 
@@ -60,7 +60,7 @@
 @interface NSObject (DDHidAppleMikeyDelegate)
 
 - (void) ddhidAppleMikey: (DDHidAppleMikey *) mikey
-                   press: (unsigned) usageId
-                upOrDown:(BOOL)upOrDown;
+                   press: (NSUInteger) usageId
+                upOrDown: (BOOL) upOrDown;
 
 @end

@@ -39,7 +39,7 @@ static void queueCallbackFunction(void* target,  IOReturn result, void* refcon,
 @implementation DDHidQueue
 
 - (id) initWithHIDQueue: (IOHIDQueueInterface **) queue
-                   size: (unsigned) size;
+                   size: (NSUInteger) size;
 {
     self = [super init];
     if (self == nil)

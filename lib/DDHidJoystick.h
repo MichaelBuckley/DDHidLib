@@ -44,14 +44,14 @@
 #pragma mark -
 #pragma mark StickElements - indexed accessors
 
-- (unsigned int) countOfStickElements;
-- (DDHidElement *) objectInStickElementsAtIndex: (unsigned int)index;
+- (NSUInteger) countOfStickElements;
+- (DDHidElement *) objectInStickElementsAtIndex: (NSUInteger)index;
 
 #pragma mark -
 #pragma mark PovElements - indexed accessors
 
-- (unsigned int) countOfPovElements;
-- (DDHidElement *) objectInPovElementsAtIndex: (unsigned int)index;
+- (NSUInteger) countOfPovElements;
+- (DDHidElement *) objectInPovElementsAtIndex: (NSUInteger)index;
 
 - (NSArray *) allElements;
 
@@ -79,15 +79,15 @@
 #pragma mark -
 #pragma mark Joystick Elements
 
-- (unsigned) numberOfButtons;
+- (NSUInteger) numberOfButtons;
 
 - (NSArray *) buttonElements;
 
 #pragma mark -
 #pragma mark Sticks - indexed accessors
 
-- (unsigned int) countOfSticks;
-- (DDHidJoystickStick *) objectInSticksAtIndex: (unsigned int)index;
+- (NSUInteger) countOfSticks;
+- (DDHidJoystickStick *) objectInSticksAtIndex: (NSUInteger)index;
 
 - (void) addElementsToQueue: (DDHidQueue *) queue;
 
@@ -106,27 +106,27 @@
 @interface NSObject (DDHidJoystickDelegate)
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
+                 stick: (NSUInteger) stick
               xChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
+                 stick: (NSUInteger) stick
               yChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             otherAxis: (unsigned) otherAxis
+                 stick: (NSUInteger) stick
+             otherAxis: (NSUInteger) otherAxis
           valueChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             povNumber: (unsigned) povNumber
+                 stick: (NSUInteger) stick
+             povNumber: (NSUInteger) povNumber
           valueChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-            buttonDown: (unsigned) buttonNumber;
+            buttonDown: (NSUInteger) buttonNumber;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-              buttonUp: (unsigned) buttonNumber;
+              buttonUp: (NSUInteger) buttonNumber;
 
 @end

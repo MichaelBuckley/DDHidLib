@@ -56,12 +56,12 @@ static DDHidUsageTables * sStandardUsageTables = nil;
     return self;
 }
 
-- (NSString *) descriptionForUsagePage: (unsigned) usagePage
-                                usage: (unsigned) usage
+- (NSString *) descriptionForUsagePage: (NSUInteger) usagePage
+                                 usage: (NSUInteger) usage
 {
-    NSString * usagePageString = [NSString stringWithFormat: @"%u", usagePage];
-    NSString * usageString = [NSString stringWithFormat: @"%u", usage];
-    // NSNumber * usagePageNumber = [NSNumber numberWithUnsignedInt: usagePage];
+    NSString * usagePageString = [NSString stringWithFormat: @"%lu", (unsigned long) usagePage];
+    NSString * usageString = [NSString stringWithFormat: @"%lu", (unsigned long) usage];
+    // NSNumber * usagePageNumber = [NSNumber numberWithUnsignedInteger: usagePage];
     
     NSDictionary * usagePageLookup = [mLookupTables objectForKey: usagePageString];
     if (usagePageLookup == nil)

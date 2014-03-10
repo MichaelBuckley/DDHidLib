@@ -53,9 +53,9 @@
     return mEvent.elementCookie;
 }
 
-- (unsigned) elementCookieAsUnsigned;
+- (NSUInteger) elementCookieAsUnsigned;
 {
-    return (unsigned) mEvent.elementCookie;
+    return (NSUInteger) mEvent.elementCookie;
 }
 
 - (SInt32) value;

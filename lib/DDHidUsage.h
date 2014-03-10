@@ -27,19 +27,19 @@
 
 @interface DDHidUsage : NSObject
 {
-    unsigned mUsagePage;
-    unsigned mUsageId;
+    NSUInteger mUsagePage;
+    NSUInteger mUsageId;
 }
 
-+ (DDHidUsage *) usageWithUsagePage: (unsigned) usagePage
-                            usageId: (unsigned) usageId;
++ (DDHidUsage *) usageWithUsagePage: (NSUInteger) usagePage
+                            usageId: (NSUInteger) usageId;
 
-- (id) initWithUsagePage: (unsigned) usagePage
-                 usageId: (unsigned) usageId;
+- (id) initWithUsagePage: (NSUInteger) usagePage
+                 usageId: (NSUInteger) usageId;
 
-- (unsigned) usagePage;
+- (NSUInteger) usagePage;
 
-- (unsigned) usageId;
+- (NSUInteger) usageId;
 
 - (NSString *) usageName;
 
@@ -47,6 +47,6 @@
 
 - (NSString *) description;
 
-- (BOOL) isEqualToUsagePage: (unsigned) usagePage usageId: (unsigned) usageId;
+- (BOOL) isEqualToUsagePage: (NSUInteger) usagePage usageId: (NSUInteger) usageId;
 
 @end

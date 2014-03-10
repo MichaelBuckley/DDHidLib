@@ -32,10 +32,10 @@
 @interface DDHidKeyboard (DDHidKeyboardDelegate)
 
 - (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-               keyDown: (unsigned) usageId;
+               keyDown: (NSUInteger) usageId;
 
 - (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-                 keyUp: (unsigned) usageId;
+                 keyUp: (NSUInteger) usageId;
 
 @end
 
@@ -88,7 +88,7 @@
     return mKeyElements;
 }
 
-- (unsigned) numberOfKeys;
+- (NSUInteger) numberOfKeys;
 {
     return [mKeyElements count];
 }
@@ -116,14 +116,14 @@
 @implementation DDHidKeyboard (DDHidKeyboardDelegate)
 
 - (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-               keyDown: (unsigned) usageId;
+               keyDown: (NSUInteger) usageId;
 {
     if ([mDelegate respondsToSelector: _cmd])
         [mDelegate ddhidKeyboard: keyboard keyDown: usageId];
 }
 
 - (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-                 keyUp: (unsigned) usageId;
+                 keyUp: (NSUInteger) usageId;
 {
     if ([mDelegate respondsToSelector: _cmd])
         [mDelegate ddhidKeyboard: keyboard keyUp: usageId];
@@ -139,8 +139,8 @@
     DDHidElement * element;
     while (element = [e nextObject])
     {
-        unsigned usagePage = [[element usage] usagePage];
-        unsigned usageId = [[element usage] usageId];
+        NSUInteger usagePage = [[element usage] usagePage];
+        NSUInteger usageId = [[element usage] usageId];
         if (usagePage == kHIDPage_KeyboardOrKeypad)
         {
             if (((usageId >= 0x04) && (usageId <= 0xA4)) ||
@@ -161,7 +161,7 @@
     while ((event = [hidQueue nextEvent]))
     {
         DDHidElement * element = [self elementForCookie: [event elementCookie]];
-        unsigned usageId = [[element usage] usageId];
+        NSUInteger usageId = [[element usage] usageId];
         SInt32 value = [event value];
         if (value == 1)
             [self ddhidKeyboard: self keyDown: usageId];

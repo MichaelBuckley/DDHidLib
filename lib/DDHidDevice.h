@@ -59,8 +59,8 @@
 
 + (NSArray *) allDevices;
 
-+ (NSArray *) allDevicesMatchingUsagePage: (unsigned) usagePage
-                                  usageId: (unsigned) usageId
++ (NSArray *) allDevicesMatchingUsagePage: (NSUInteger) usagePage
+                                  usageId: (NSUInteger) usageId
                                 withClass: (Class) hidClass
                         skipZeroLocations: (BOOL) emptyLocation;
 
@@ -80,7 +80,7 @@
 - (void) open;
 - (void) openWithOptions: (UInt32) options;
 - (void) close;
-- (DDHidQueue *) createQueueWithSize: (unsigned) size;
+- (DDHidQueue *) createQueueWithSize: (NSUInteger) size;
 - (long) getElementValue: (DDHidElement *) element;
 
 #pragma mark -
@@ -125,7 +125,7 @@
 
 @interface DDHidDevice (Protected)
 
-- (unsigned) sizeOfDefaultQueue;
+- (NSUInteger) sizeOfDefaultQueue;
 - (void) addElementsToDefaultQueue;
 
 @end

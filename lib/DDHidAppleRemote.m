@@ -209,7 +209,7 @@
         {
             sumOfValues += [event value];
             [cookieString appendString:
-                [NSString stringWithFormat: @"%u_", [event elementCookieAsUnsigned]]];
+                [NSString stringWithFormat: @"%lu_", (unsigned long) [event elementCookieAsUnsigned]]];
         }
     }
     [self handleEventWithCookieString: cookieString sumOfValues: sumOfValues];	

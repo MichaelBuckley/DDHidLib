@@ -53,7 +53,7 @@
 
 - (NSArray *) buttonElements;
 
-- (unsigned) numberOfButtons;
+- (NSUInteger) numberOfButtons;
 
 - (void) addElementsToQueue: (DDHidQueue *) queue;
 
@@ -71,8 +71,8 @@
 - (void) ddhidMouse: (DDHidMouse *) mouse xChanged: (SInt32) deltaX;
 - (void) ddhidMouse: (DDHidMouse *) mouse yChanged: (SInt32) deltaY;
 - (void) ddhidMouse: (DDHidMouse *) mouse wheelChanged: (SInt32) deltaWheel;
-- (void) ddhidMouse: (DDHidMouse *) mouse buttonDown: (unsigned) buttonNumber;
-- (void) ddhidMouse: (DDHidMouse *) mouse buttonUp: (unsigned) buttonNumber;
+- (void) ddhidMouse: (DDHidMouse *) mouse buttonDown: (NSUInteger) buttonNumber;
+- (void) ddhidMouse: (DDHidMouse *) mouse buttonUp: (NSUInteger) buttonNumber;
 
 @end
 

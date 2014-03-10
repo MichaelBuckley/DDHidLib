@@ -34,7 +34,7 @@
 
 - (id) initWithLookupTables: (NSDictionary *) lookupTables;
 
-- (NSString *) descriptionForUsagePage: (unsigned) usagePage
-                                 usage: (unsigned) usage;
+- (NSString *) descriptionForUsagePage: (NSUInteger) usagePage
+                                 usage: (NSUInteger) usage;
 
 @end

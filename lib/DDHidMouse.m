@@ -37,8 +37,8 @@
 - (void) ddhidMouse: (DDHidMouse *) mouse xChanged: (SInt32) deltaX;
 - (void) ddhidMouse: (DDHidMouse *) mouse yChanged: (SInt32) deltaY;
 - (void) ddhidMouse: (DDHidMouse *) mouse wheelChanged: (SInt32) deltaWheel;
-- (void) ddhidMouse: (DDHidMouse *) mouse buttonDown: (unsigned) buttonNumber;
-- (void) ddhidMouse: (DDHidMouse *) mouse buttonUp: (unsigned) buttonNumber;
+- (void) ddhidMouse: (DDHidMouse *) mouse buttonDown: (NSUInteger) buttonNumber;
+- (void) ddhidMouse: (DDHidMouse *) mouse buttonUp: (NSUInteger) buttonNumber;
 
 @end
 
@@ -122,7 +122,7 @@
     return mButtonElements; 
 }
 
-- (unsigned) numberOfButtons;
+- (NSUInteger) numberOfButtons;
 {
     return [mButtonElements count];
 }
@@ -171,13 +171,13 @@
         [mDelegate ddhidMouse: mouse wheelChanged: deltaWheel];
 }
 
-- (void) ddhidMouse: (DDHidMouse *) mouse buttonDown: (unsigned) buttonNumber;
+- (void) ddhidMouse: (DDHidMouse *) mouse buttonDown: (NSUInteger) buttonNumber;
 {
     if ([mDelegate respondsToSelector: _cmd])
         [mDelegate ddhidMouse: mouse buttonDown: buttonNumber];
 }
 
-- (void) ddhidMouse: (DDHidMouse *) mouse buttonUp: (unsigned) buttonNumber;
+- (void) ddhidMouse: (DDHidMouse *) mouse buttonUp: (NSUInteger) buttonNumber;
 {
     if ([mDelegate respondsToSelector: _cmd])
         [mDelegate ddhidMouse: mouse buttonUp: buttonNumber];
@@ -193,8 +193,8 @@
     DDHidElement * element;
     while (element = [e nextObject])
     {
-        unsigned usagePage = [[element usage] usagePage];
-        unsigned usageId = [[element usage] usageId];
+        NSUInteger usagePage = [[element usage] usagePage];
+        NSUInteger usageId = [[element usage] usageId];
         if ((usagePage == kHIDPage_GenericDesktop) &&
             (usageId == kHIDUsage_GD_X))
         {
@@ -251,7 +251,7 @@
         }
         else
         {
-            unsigned i = 0;
+            NSUInteger i = 0;
             for (i = 0; i < [[self buttonElements] count]; i++)
             {
                 if (cookie == [[[self buttonElements] objectAtIndex: i] cookie])

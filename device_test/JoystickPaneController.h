@@ -51,22 +51,22 @@
 - (int) yAxis;
 
 - (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
+                 stick: (NSUInteger) stick
               xChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *)  joystick
-                 stick: (unsigned) stick
+                 stick: (NSUInteger) stick
               yChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-                 stick: (unsigned) stick
-             otherAxis: (unsigned) otherAxis
+                 stick: (NSUInteger) stick
+             otherAxis: (NSUInteger) otherAxis
           valueChanged: (int) value;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-            buttonDown: (unsigned) buttonNumber;
+            buttonDown: (NSUInteger) buttonNumber;
 
 - (void) ddhidJoystick: (DDHidJoystick *) joystick
-              buttonUp: (unsigned) buttonNumber;
+              buttonUp: (NSUInteger) buttonNumber;
 
 @end

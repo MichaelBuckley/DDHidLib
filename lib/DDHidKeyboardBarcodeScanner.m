@@ -40,7 +40,7 @@
 
 - (void) initKeyboardElements: (NSArray *) elements;
 - (void) ddhidQueueHasEvents: (DDHidQueue *) hidQueue;
-- (void) processBarcodeDigit: (unsigned) usageId;
+- (void) processBarcodeDigit: (NSUInteger) usageId;
 - (void) clearAccumulatedInput;
 - (void) invalidateBarcodeInputTimer;
 
@@ -150,8 +150,8 @@
     DDHidElement * element;
     while ((element = [e nextObject]))
     {
-        unsigned usagePage = [[element usage] usagePage];
-        unsigned usageId = [[element usage] usageId];
+        NSUInteger usagePage = [[element usage] usagePage];
+        NSUInteger usageId = [[element usage] usageId];
         if (usagePage == kHIDPage_KeyboardOrKeypad)
         {
             if ((usageId >= kHIDUsage_KeyboardA) && (usageId <= kHIDUsage_Keyboard0))
@@ -171,7 +171,7 @@
     while ((event = [hidQueue nextEvent]))
     {
         DDHidElement * element = [self elementForCookie: [event elementCookie]];
-        unsigned usageId = [[element usage] usageId];
+        NSUInteger usageId = [[element usage] usageId];
         SInt32 value = [event value];
         if (value == 1) // key down
             [self processBarcodeDigit: usageId];
@@ -181,7 +181,7 @@
 #define UPC_A_BARCODE_LENGTH (12)
 #define BARCODE_INPUT_TIMEOUT (0.5)
    
-- (void) processBarcodeDigit: (unsigned) usageId;
+- (void) processBarcodeDigit: (NSUInteger) usageId;
 {
     if (usageId <= kHIDUsage_KeyboardZ || usageId >= kHIDUsage_KeyboardCapsLock) { // an alphabetic key was pressed => probably not a barcode scanner
         [self willChangeValueForKey:@"isLikelyKeyboardBarcodeScanner"];
@@ -195,7 +195,7 @@
     if (!mBarcodeInputTimer) // schedule a timer to make sure we get the rest of the digits in a timely manner
         mBarcodeInputTimer = [[NSTimer scheduledTimerWithTimeInterval:BARCODE_INPUT_TIMEOUT target:self selector:@selector(fireBarcodeInputTimeout:) userInfo:nil repeats:NO] retain];
     
-    [mAccumulatedDigits appendString:[NSString stringWithFormat:@"%d", (usageId + 1) % 10]];
+    [mAccumulatedDigits appendString:[NSString stringWithFormat:@"%lu", (usageId + 1) % 10]];
 }
 
 - (void) fireBarcodeInputTimeout: (NSTimer *) timer;

@@ -138,7 +138,9 @@
 
 @implementation AppleMikeyPaneController (DDHidAppleMikeyDelegate)
 
-- (void) ddhidAppleMikey:(DDHidAppleMikey *)mikey press:(unsigned int)usageId upOrDown:(BOOL)upOrDown
+- (void) ddhidAppleMikey: (DDHidAppleMikey *) mikey
+                   press: (NSUInteger) usageId
+                upOrDown: (BOOL)upOrDown
 {
     NSString *usage = nil;
     if(usageId==kHIDUsage_GD_SystemMenuDown) {

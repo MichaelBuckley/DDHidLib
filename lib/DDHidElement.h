@@ -47,7 +47,7 @@
 - (NSString *) description;
 
 - (IOHIDElementCookie) cookie;
-- (unsigned) cookieAsUnsigned;
+- (NSUInteger) cookieAsUnsigned;
 
 - (NSArray *) elements;
 - (DDHidUsage *) usage;

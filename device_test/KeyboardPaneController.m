@@ -28,7 +28,7 @@
 
 @interface KeyboardPaneController (Private)
 
-- (void) addEvent: (NSString *) event usageId: (unsigned) usageId;
+- (void) addEvent: (NSString *) event usageId: (NSUInteger) usageId;
 
 @end
 
@@ -146,13 +146,13 @@
 @implementation KeyboardPaneController (DDHidKeyboardDelegate)
 
 - (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-               keyDown: (unsigned) usageId;
+               keyDown: (NSUInteger) usageId;
 {
     [self addEvent: @"Key Down" usageId: usageId];
 }
 
 - (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-                 keyUp: (unsigned) usageId;
+                 keyUp: (NSUInteger) usageId;
 {
     [self addEvent: @"Key Up" usageId: usageId];
 }
@@ -161,13 +161,13 @@
 
 @implementation KeyboardPaneController (Private)
 
-- (void) addEvent: (NSString *) event usageId: (unsigned) usageId;
+- (void) addEvent: (NSString *) event usageId: (NSUInteger) usageId;
 {
     DDHidUsageTables * usageTables = [DDHidUsageTables standardUsageTables];
-    NSString * description = [NSString stringWithFormat: @"%@ (0x%04X)",
+    NSString * description = [NSString stringWithFormat: @"%@ (0x%04lX)",
         [usageTables descriptionForUsagePage: kHIDPage_KeyboardOrKeypad
                                        usage: usageId],
-        usageId];
+        (unsigned long) usageId];
     
     NSMutableDictionary * row = [[mKeyboardEventsController newObject] autorelease];
     [row setObject: event forKey: @"event"];

@@ -56,7 +56,7 @@
 @interface AppleMikeyPaneController (DDHidAppleMikeyDelegate)
 
 - (void) ddhidAppleMikey: (DDHidAppleMikey *) mikey
-                   press: (unsigned) usageId
-                upOrDown:(BOOL)upOrDown;
+                   press: (NSUInteger) usageId
+                upOrDown: (BOOL) upOrDown;
 
 @end

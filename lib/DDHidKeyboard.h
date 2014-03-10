@@ -44,7 +44,7 @@
 
 - (NSArray *) keyElements;
 
-- (unsigned) numberOfKeys;
+- (NSUInteger) numberOfKeys;
 
 - (void) addElementsToQueue: (DDHidQueue *) queue;
 
@@ -60,9 +60,9 @@
 @interface NSObject (DDHidKeyboardDelegate)
 
 - (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-               keyDown: (unsigned) usageId;
+               keyDown: (NSUInteger) usageId;
 
 - (void) ddhidKeyboard: (DDHidKeyboard *) keyboard
-                 keyUp: (unsigned) usageId;
+                 keyUp: (NSUInteger) usageId;
 
 @end

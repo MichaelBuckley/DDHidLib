@@ -125,8 +125,8 @@
     return retVal;
 }
 
-+ (NSArray *) allDevicesMatchingUsagePage: (unsigned) usagePage
-                                  usageId: (unsigned) usageId
++ (NSArray *) allDevicesMatchingUsagePage: (NSUInteger) usagePage
+                                  usageId: (NSUInteger) usageId
                                 withClass: (Class) hidClass
                         skipZeroLocations: (BOOL) skipZeroLocations;
 {
@@ -138,9 +138,9 @@
     if(hidMatchDictionary) {
         NSMutableDictionary * objcMatchDictionary =
             (NSMutableDictionary *) hidMatchDictionary;
-        [objcMatchDictionary ddhid_setObject: [NSNumber numberWithUnsignedInt: usagePage]
+        [objcMatchDictionary ddhid_setObject: [NSNumber numberWithUnsignedInteger: usagePage]
                                    forString: kIOHIDDeviceUsagePageKey];
-        [objcMatchDictionary ddhid_setObject: [NSNumber numberWithUnsignedInt: usageId]
+        [objcMatchDictionary ddhid_setObject: [NSNumber numberWithUnsignedInteger: usageId]
                                    forString: kIOHIDDeviceUsageKey];
         retVal = [self allDevicesMatchingCFDictionary: hidMatchDictionary
                                           withClass: hidClass
@@ -224,7 +224,7 @@ return retVal;
     NSXThrowError((*mDeviceInterface)->close(mDeviceInterface));
 }
 
-- (DDHidQueue *) createQueueWithSize: (unsigned) size;
+- (DDHidQueue *) createQueueWithSize: (NSUInteger) size;
 {
     IOHIDQueueInterface ** queue =
     (*mDeviceInterface)->allocQueue(mDeviceInterface);
@@ -391,7 +391,7 @@ return retVal;
 
 - (DDHidElement *) elementForCookie: (IOHIDElementCookie) cookie;
 {
-    NSNumber * n = [NSNumber numberWithUnsignedInt: (unsigned) cookie];
+    NSNumber * n = [NSNumber numberWithUnsignedInteger: (NSUInteger) cookie];
     return [mElementsByCookie objectForKey: n];
 }
 
@@ -434,7 +434,7 @@ return retVal;
 
 @implementation DDHidDevice (Protected)
 
-- (unsigned) sizeOfDefaultQueue;
+- (NSUInteger) sizeOfDefaultQueue;
 {
     return 10;
 }
@@ -498,7 +498,7 @@ return retVal;
     DDHidElement * element;
     while (element = [e nextObject])
     {
-        NSNumber * n = [NSNumber numberWithUnsignedInt: [element cookieAsUnsigned]];
+        NSNumber * n = [NSNumber numberWithUnsignedInteger: [element cookieAsUnsigned]];
         [mElementsByCookie setObject: element
                               forKey: n];
         NSArray * children = [element elements];
@@ -523,8 +523,8 @@ return retVal;
     mElements = [DDHidElement elementsWithPropertiesArray: elementProperties];
     [mElements retain];
     
-    unsigned usagePage = [mProperties ddhid_unsignedIntForString: kIOHIDPrimaryUsagePageKey];
-    unsigned usageId = [mProperties ddhid_unsignedIntForString: kIOHIDPrimaryUsageKey];
+    NSUInteger usagePage = [mProperties ddhid_unsignedIntForString: kIOHIDPrimaryUsagePageKey];
+    NSUInteger usageId = [mProperties ddhid_unsignedIntForString: kIOHIDPrimaryUsageKey];
     
     mPrimaryUsage = [[DDHidUsage alloc] initWithUsagePage: usagePage
                                                   usageId: usageId];

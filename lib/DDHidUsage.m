@@ -27,15 +27,15 @@
 
 @implementation DDHidUsage
 
-+ (DDHidUsage *) usageWithUsagePage: (unsigned) usagePage
-                            usageId: (unsigned) usageId;
++ (DDHidUsage *) usageWithUsagePage: (NSUInteger) usagePage
+                            usageId: (NSUInteger) usageId;
 {
     return [[[self alloc] initWithUsagePage: usagePage usageId: usageId]
         autorelease];
 }
 
-- (id) initWithUsagePage: (unsigned) usagePage
-                 usageId: (unsigned) usageId;
+- (id) initWithUsagePage: (NSUInteger) usagePage
+                 usageId: (NSUInteger) usageId;
 {
     self = [super init];
     if (self == nil)
@@ -47,12 +47,12 @@
     return self;
 }
 
-- (unsigned) usagePage;
+- (NSUInteger) usagePage;
 {
     return mUsagePage;
 }
 
-- (unsigned) usageId;
+- (NSUInteger) usageId;
 {
     return mUsageId;
 }
@@ -67,8 +67,8 @@
 
 - (NSString *) usageNameWithIds;
 {
-    return [NSString stringWithFormat: @"%@ (0x%04x : 0x%04x)",
-        [self usageName], mUsagePage, mUsageId];
+    return [NSString stringWithFormat: @"%@ (0x%04lx : 0x%04lx)",
+        [self usageName], (unsigned long) mUsagePage, (unsigned long) mUsageId];
 }
 
 - (NSString *) description;
@@ -76,7 +76,7 @@
     return [NSString stringWithFormat: @"HID Usage: %@", [self usageName]];
 }
 
-- (BOOL) isEqualToUsagePage: (unsigned) usagePage usageId: (unsigned) usageId;
+- (BOOL) isEqualToUsagePage: (NSUInteger) usagePage usageId: (NSUInteger) usageId;
 {
     return ((mUsagePage == usagePage) && (mUsageId == usageId));
 }

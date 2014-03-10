@@ -39,7 +39,7 @@
 }
 
 - (id) initWithHIDQueue: (IOHIDQueueInterface **) queue
-                   size: (unsigned) size;
+                   size: (NSUInteger) size;
 
 - (void) addElement: (DDHidElement *) element;
 
